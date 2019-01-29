@@ -1,21 +1,65 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
+import { Platform, StyleSheet, Text, View } from 'react-native'
+import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
+import reducer from './reducers'
+import { white, purple } from './utils/colors'
+import AppStatusBar from './components/AppStatusBar'
+import Decks from './components/Decks'
 
-export default class App extends React.Component {
-  render() {
+const Tabs = {
+	Decks: {
+		screen: Decks,
+		navigationOptions: {
+			tabBarLabel: 'Decks'
+		}
+	}
+}
+
+const TabNavigationOptions = {
+	navigationOptions: {
+		header: null
+	},
+	tabBarOptions: {
+		activeTintColor: (Platform.OS === 'ios') ? purple : white,
+		style: {
+			height: 56,
+			backgroundColor: (Platform.OS === 'ios') ? white : purple,
+			shadowColor: 'rgba(0, 0, 0, 0.24)',
+			shadowOffset: {
+				width: 0,
+				height: 3
+			},
+			shadowRadius: 6,
+			shadowOpacity: 1
+		}
+	}
+}
+
+const TabsContainer = (Platform.OS === 'ios')
+	? createBottomTabNavigator(Tabs, TabNavigationOptions)
+	: createMaterialTopTabNavigator(Tabs, TabNavigationOptions)
+
+const AppNavigator = createStackNavigator({
+  Home: {
+    screen: TabsContainer,
+    navigationOptions: {
+      header: null
+    }
+  }
+})
+
+const AppNavigatorContainer = createAppContainer(AppNavigator)
+
+export default class App extends Component {
+
+	render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+    	<Provider store={createStore(reducer)}>
+    		<AppStatusBar backgroundColor={purple}/>
+	      <AppNavigatorContainer />
+	    </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
