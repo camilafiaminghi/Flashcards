@@ -15,7 +15,7 @@ class Decks extends Component {
 
 	componentDidMount() {
 		const { handleEntries } = this.props
-		// handleEntries()
+		handleEntries()
 	}
 
 	render() {
@@ -44,40 +44,11 @@ class Decks extends Component {
 	}
 }
 
-export const mapStateToProps = (state) => {
-
-	console.log(state)
-
-	const obj = {
-		'JavaScript' : {
-			title: 'JavaScript',
-			questions: [{}]
-		},
-		'Test1' : {
-			title: 'Test1',
-			questions: [{},{},{}]
-		},
-		'Test2' : {
-			title: 'Test2',
-			questions: []
-		},
-		'Test3' : {
-			title: 'Test3',
-			questions: []
-		},
-		'Test4' : {
-			title: 'Test4',
-			questions: []
-		},
-		'Test5' : {
-			title: 'Test5',
-			questions: []
-		}
-	}
+export const mapStateToProps = ({ entries }) => {
 
 	return {
-		decksKeys: Object.keys(obj),
-		decks: obj
+		decksKeys: Object.keys(entries),
+		decks: entries
 	}
 }
 
@@ -89,6 +60,7 @@ export const mapDispatchToProps = (dispatch) => {
 
 export default connect(mapStateToProps, mapDispatchToProps)(Decks)
 
+/* STYLES */
 const styles = StyleSheet.create({
   container: {
     flex: 1,

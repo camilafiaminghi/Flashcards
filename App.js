@@ -4,13 +4,13 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
-import reducer from './reducers'
+import reducers from './reducers'
 import { white, purple } from './utils/colors'
 import AppStatusBar from './components/AppStatusBar'
 import Decks from './components/Decks'
 
 const store = createStore(
-	combineReducers({reducer}),
+	reducers(),
 	applyMiddleware(thunk)
 )
 
@@ -59,10 +59,9 @@ const AppNavigator = createStackNavigator({
 const AppNavigatorContainer = createAppContainer(AppNavigator)
 
 export default class App extends Component {
-
 	render() {
     return (
-    	<Provider store={createStore(reducer)}>
+    	<Provider store={store}>
     		<AppStatusBar backgroundColor={purple}/>
 	      <AppNavigatorContainer />
 	    </Provider>

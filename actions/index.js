@@ -1,4 +1,4 @@
-import { getDecks } from '../utils/api'
+import { setInitialData, getDecks  } from '../utils/api'
 
 export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
 export const ADD_ENTRY = 'ADD_ENTRY'
@@ -17,19 +17,17 @@ export function addEntry (entry) {
 	}
 }
 
-
 export function handleReceiveEntries () {
 	return (dispatch) => {
 		// dispatch(showLoading())
-		// dispatch(saveCommentRequest(comment))
 
-		return getDecks(comment, parentId)
+		return setInitialData()
+			.then(getDecks)
 			.then((data) => {
-				console.log(data);
+				dispatch(receiveEntries(JSON.parse(data)))
 			})
-			.catch(() => {
-				// dispatch(showCommentFailure('save'))
-				// dispatch(hideLoading())
+			.catch((error) => {
+				console.log(error)
 			})
 	}
 }
