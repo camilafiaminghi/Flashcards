@@ -7,7 +7,8 @@ import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNav
 import reducers from './reducers'
 import { white, purple } from './utils/colors'
 import AppStatusBar from './components/AppStatusBar'
-import Decks from './components/Decks'
+import Decks from './containers/Decks'
+import AddDeck from './containers/AddDeck'
 
 const store = createStore(
 	reducers(),
@@ -20,7 +21,15 @@ const Tabs = {
 		navigationOptions: {
 			tabBarLabel: 'Decks'
 		}
-	}
+	},
+	AddDeck: {
+		screen: AddDeck,
+		navigationOptions: {
+			tabBarLabel: 'New Deck'
+		}
+	},
+
+
 }
 
 const TabNavigationOptions = {

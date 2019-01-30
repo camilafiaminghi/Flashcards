@@ -4,11 +4,11 @@ export const FLASHCARDS_STORAGE_KEY = 'Flashcards:decks'
 const obj = {
 	'JavaScript' : {
 		title: 'JavaScript',
-		questions: [{}]
+		questions: []
 	},
 	'React' : {
 		title: 'React',
-		questions: [{},{},{}]
+		questions: []
 	}
 }
 
@@ -17,7 +17,8 @@ function generateUID () {
 }
 
 export function setInitialData (data=obj) {
-	return AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
+	// return AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
+	return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
 }
 
 export function getDecks () {

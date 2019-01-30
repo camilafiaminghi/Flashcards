@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { handleReceiveEntries } from '../actions'
-import { gray, lightPurp } from '../utils/colors'
+import { gray, lightPurp, purple, white } from '../utils/colors'
 
 class Decks extends Component {
 
@@ -13,13 +14,40 @@ class Decks extends Component {
 		decks: PropTypes.object.isRequired
 	}
 
+	state = {
+		loaded: false
+	}
+
 	componentDidMount() {
 		const { handleEntries } = this.props
 		handleEntries()
+			.then(() => (this.setState({loaded: true})))
+	}
+
+	toAddDeck = () => {
+		this.props.navigation.dispatch(NavigationActions.navigate({
+			routeName: 'AddDeck'
+		}))
 	}
 
 	render() {
+		const { loaded } = this.state
 		const { decks, decksKeys } = this.props
+
+		if ( decksKeys.length === 0 && loaded ) {
+			return (
+				<View style={styles.container}>
+					<View style={styles.item}>
+						<Text style={styles.textEmpty}>You do not create any deck!</Text>
+						<TouchableOpacity
+							style={[styles.btn, styles.input]}
+							onPress={this.toAddDeck}>
+							<Text style={styles.btnText}>{'Create a Deck'.toUpperCase()}</Text>
+						</TouchableOpacity>
+					</View>
+				</View>
+			)
+		}
 
 		return (
 			<View style={styles.container}>
@@ -87,5 +115,30 @@ const styles = StyleSheet.create({
   detail: {
   	fontSize: 12,
   	color: gray
-  }
+  },
+  textEmpty: {
+  	fontSize: 20,
+		marginRight: 10,
+		marginLeft: 10,
+		color: '#333333'
+  },
+  input: {
+		flexDirection: 'row',
+		alignSelf: 'stretch',
+		height: 50,
+		borderColor: purple,
+		borderWidth: 1,
+		borderRadius: 4,
+		margin: 10
+	},
+	btn: {
+		alignItems: 'center',
+		justifyContent: 'center',
+		padding: 4,
+	},
+	btnText: {
+		fontSize: 14,
+		fontWeight: 'bold',
+		color: purple
+	}
 })

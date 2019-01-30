@@ -2,14 +2,18 @@ import { RECEIVE_ENTRIES, ADD_ENTRY } from '../actions'
 
 function entries (state = {}, action) {
 	switch (action.type) {
-		case RECEIVE_ENTRIES:return {
+		case RECEIVE_ENTRIES:
+			return {
 				...state,
 				...action.entries
 			}
 		case ADD_ENTRY:
 			return {
 				...state,
-				...action.entry
+				[action.entry.title] : {
+					title: action.entry.title,
+					questions: []
+				}
 			}
 		default:
 			return state
