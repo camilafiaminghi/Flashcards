@@ -46,7 +46,7 @@ class AddDeck extends Component {
 
 		return (
 			<View style={styles.container}>
-				<KeyboardAvoidingView behavior='padding' style={styles.item}>
+				<KeyboardAvoidingView behavior='padding' style={styles.card}>
 
 					<Text style={styles.text}>What the title of your new deck?</Text>
 
@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
 		alignItems: 'stretch',
 		backgroundColor: '#f2f2f2',
 	},
-	item: {
+	card: {
 		flex: 1,
 		flexGrow: 1,
 		alignItems: 'center',

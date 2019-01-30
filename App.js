@@ -3,11 +3,13 @@ import thunk from 'redux-thunk'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Platform, StyleSheet, Text, View } from 'react-native'
+import { Constants } from 'expo'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 import reducers from './reducers'
 import { white, purple } from './utils/colors'
 import AppStatusBar from './components/AppStatusBar'
 import Decks from './containers/Decks'
+import Deck from './containers/Deck'
 import AddDeck from './containers/AddDeck'
 
 const store = createStore(
@@ -61,6 +63,16 @@ const AppNavigator = createStackNavigator({
     screen: TabsContainer,
     navigationOptions: {
       header: null
+    }
+  },
+  Deck: {
+    screen: Deck,
+    navigationOptions: {
+      headerTintColor: white,
+      headerStyle: {
+        backgroundColor: purple,
+        marginTop: (- Constants.statusBarHeight)
+      }
     }
   }
 })

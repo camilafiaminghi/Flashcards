@@ -57,7 +57,12 @@ class Decks extends Component {
 					showsVerticalScrollIndicator={false}
           renderItem={
           	({item}) => (
-		          <TouchableOpacity style={styles.item}>
+		          <TouchableOpacity
+		          	style={styles.item}
+								onPress={() => this.props.navigation.navigate(
+									'Deck',
+									{ entryId: item }
+								)}>
 		            <Text style={styles.text}>{item}</Text>
 		            <Text style={styles.detail}>
 		            	{decks[item].questions.length} { decks[item].questions.length === 1 && 'card' } { decks[item].questions.length !== 1 && 'cards' }
@@ -103,7 +108,7 @@ const styles = StyleSheet.create({
   	marginTop: 2,
   	marginBottom: 2,
   	marginRight: 8,
-  	marginLeft: 4,
+  	marginLeft: 8,
   	borderRadius: 4,
   	height: 80
   },
