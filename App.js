@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { createStore } from 'redux'
+import thunk from 'redux-thunk'
+import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
@@ -7,6 +8,11 @@ import reducer from './reducers'
 import { white, purple } from './utils/colors'
 import AppStatusBar from './components/AppStatusBar'
 import Decks from './components/Decks'
+
+const store = createStore(
+	combineReducers({reducer}),
+	applyMiddleware(thunk)
+)
 
 const Tabs = {
 	Decks: {
