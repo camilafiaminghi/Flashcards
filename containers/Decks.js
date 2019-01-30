@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { handleReceiveEntries } from '../actions'
-import { gray, lightPurp, purple, white } from '../utils/colors'
+import { gray, lightPurp, purple, white, black } from '../utils/colors'
 
 class Decks extends Component {
 
@@ -27,6 +27,13 @@ class Decks extends Component {
 	toAddDeck = () => {
 		this.props.navigation.dispatch(NavigationActions.navigate({
 			routeName: 'AddDeck'
+		}))
+	}
+
+	toDeck = (entryId) => {
+		this.props.navigation.dispatch(NavigationActions.navigate({
+			routeName: 'Deck',
+			params: { entryId }
 		}))
 	}
 
@@ -59,10 +66,7 @@ class Decks extends Component {
           	({item}) => (
 		          <TouchableOpacity
 		          	style={styles.item}
-								onPress={() => this.props.navigation.navigate(
-									'Deck',
-									{ entryId: item }
-								)}>
+								onPress={() => this.toDeck(item)}>
 		            <Text style={styles.text}>{item}</Text>
 		            <Text style={styles.detail}>
 		            	{decks[item].questions.length} { decks[item].questions.length === 1 && 'card' } { decks[item].questions.length !== 1 && 'cards' }
@@ -105,20 +109,19 @@ const styles = StyleSheet.create({
   	alignItems: 'center',
   	justifyContent: 'center',
   	backgroundColor: 'white',
-  	marginTop: 2,
-  	marginBottom: 2,
+  	marginTop: 4,
+  	marginBottom: 4,
   	marginRight: 8,
   	marginLeft: 8,
   	borderRadius: 4,
-  	height: 80
+  	padding: 20
   },
   text: {
-  	fontSize: 16,
-  	fontWeight: 'bold',
-  	color: '#333333'
+  	fontSize: 18,
+  	color: black
   },
   detail: {
-  	fontSize: 12,
+  	fontSize: 14,
   	color: gray
   },
   textEmpty: {

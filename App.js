@@ -6,11 +6,13 @@ import { Platform, StyleSheet, Text, View } from 'react-native'
 import { Constants } from 'expo'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 import reducers from './reducers'
-import { white, purple } from './utils/colors'
+import { white, purple, black, orange } from './utils/colors'
 import AppStatusBar from './components/AppStatusBar'
 import Decks from './containers/Decks'
 import Deck from './containers/Deck'
 import AddDeck from './containers/AddDeck'
+import AddCard from './containers/AddCard'
+import Quiz from './containers/Quiz'
 
 const store = createStore(
 	reducers(),
@@ -29,9 +31,7 @@ const Tabs = {
 		navigationOptions: {
 			tabBarLabel: 'New Deck'
 		}
-	},
-
-
+	}
 }
 
 const TabNavigationOptions = {
@@ -58,6 +58,14 @@ const TabsContainer = (Platform.OS === 'ios')
 	? createBottomTabNavigator(Tabs, TabNavigationOptions)
 	: createMaterialTopTabNavigator(Tabs, TabNavigationOptions)
 
+const stackNavOptions = (headerColor, backColor) => ({
+  headerTintColor: headerColor,
+  headerStyle: {
+    backgroundColor: backColor,
+    marginTop: (- Constants.statusBarHeight)
+  }
+})
+
 const AppNavigator = createStackNavigator({
   Home: {
     screen: TabsContainer,
@@ -67,13 +75,15 @@ const AppNavigator = createStackNavigator({
   },
   Deck: {
     screen: Deck,
-    navigationOptions: {
-      headerTintColor: white,
-      headerStyle: {
-        backgroundColor: purple,
-        marginTop: (- Constants.statusBarHeight)
-      }
-    }
+    navigationOptions: stackNavOptions(white, purple)
+  },
+  Quiz: {
+    screen: Quiz,
+    navigationOptions: stackNavOptions(white, black)
+  },
+  AddCard: {
+    screen: AddCard,
+    navigationOptions: stackNavOptions(white, black)
   }
 })
 

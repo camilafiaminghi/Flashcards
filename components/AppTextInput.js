@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, View, Text, TextInput } from 'react-native'
 import { validationRules } from '../utils/validation'
-import { purple } from '../utils/colors'
+import { gray, black } from '../utils/colors'
 
 class AppTextInput extends Component {
 
@@ -36,8 +36,8 @@ class AppTextInput extends Component {
 	}
 
 	render() {
-		const { text, changed, valid, placeholder } = this.state
-		const { maxLen } = this.props
+		const { text, changed, valid } = this.state
+		const { maxLen, placeholder } = this.props
 		const textLeft = maxLen - text.length
 
 		return (
@@ -67,7 +67,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignSelf: 'stretch',
 		height: 50,
-		borderColor: purple,
+		borderColor: gray,
 		borderWidth: 1,
 		borderRadius: 4
 	},
@@ -76,6 +76,6 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 12,
-		color: purple
+		color: black
 	}
 })

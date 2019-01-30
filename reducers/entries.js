@@ -1,4 +1,7 @@
-import { RECEIVE_ENTRIES, ADD_ENTRY } from '../actions'
+import {
+		RECEIVE_ENTRIES,
+		ADD_ENTRY,
+		ADD_CARD } from '../actions'
 
 function entries (state = {}, action) {
 	switch (action.type) {
@@ -13,6 +16,14 @@ function entries (state = {}, action) {
 				[action.entry.title] : {
 					title: action.entry.title,
 					questions: []
+				}
+			}
+		case ADD_CARD:
+			return {
+				...state,
+				[action.entry] : {
+					...state[action.entry],
+					questions: [...state[action.entry].questions, action.card]
 				}
 			}
 		default:

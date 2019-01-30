@@ -2,43 +2,71 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
-import { handleAddEntry } from '../actions'
+import { StyleSheet, KeyboardAvoidingView, Text, View, TouchableOpacity } from 'react-native'
+import { handleAddCard } from '../actions'
+import { gray, lightPurp, purple, white, orange, black } from '../utils/colors'
 import { isValid } from '../utils/validation'
-import { gray, black, purple, white } from '../utils/colors'
 import AppTextInput from '../components/AppTextInput'
 
-class AddDeck extends Component {
+class AddCard extends Component {
+
+	static navigationOptions = () => {
+		return {
+			title: 'New Card'
+		}
+	}
 
 	static propTypes = {
-		onAddEntry: PropTypes.func.isRequired
+		entryId: PropTypes.string.isRequired
 	}
 
 	state = {
-		title: '',
+		form: {
+			title: '',
+			body: ''
+		},
+		validation: {
+			title: false,
+			body: false
+		},
 		valid: false
-	}
-
-	toDecks = () => {
-		this.props.navigation.dispatch(NavigationActions.navigate({
-			routeName: 'Decks'
-		}))
-	}
-
-	submit = () => {
-		const { onAddEntry } = this.props
-		const { title } = this.state
-
-		onAddEntry({ title })
-			.then(this.toDecks) /* Navigate to Decks */
 	}
 
 	onInputChange = (name, value, valid) => {
 		this.setState((state) => ({
 			...state,
-			title: value,
-			valid
+			form: {
+				...state.form,
+				[name]: value
+			},
+			validation: {
+				...state.validation,
+				[name]: valid
+			}
 		}))
+
+		/* VALIDATE ALL */
+		this.setState((state) => ({
+			...state,
+			valid: isValid(state.validation)
+		}))
+	}
+
+	toDeck = () => {
+		const { entryId } = this.props
+
+		this.props.navigation.dispatch(NavigationActions.navigate({
+			routeName: 'Deck',
+			params: { entryId }
+		}))
+	}
+
+	submit = () => {
+		const { onAddCard, entry } = this.props
+		const { form } = this.state
+
+		// onAddCard(entry, form)
+		// 	.then(this.toDecks) /* Navigate to Decks */
 	}
 
 	render() {
@@ -48,12 +76,16 @@ class AddDeck extends Component {
 			<View style={styles.container}>
 				<KeyboardAvoidingView behavior='padding' style={styles.card}>
 
-					<Text style={styles.text}>What the title of your new deck?</Text>
-
 					<AppTextInput
 						name='title'
-						placeholder='Deck Title (max 55 characters)'
-						maxLen={55}
+						placeholder='Question? (max 122 characters)'
+						maxLen={122}
+						onInputChange={this.onInputChange} />
+
+					<AppTextInput
+						name='body'
+						placeholder='Answer (max 255 characters)'
+						maxLen={255}
 						onInputChange={this.onInputChange} />
 
 		      <TouchableOpacity
@@ -69,14 +101,23 @@ class AddDeck extends Component {
 	}
 }
 
-export const mapDispatchToProps = (dispatch) => {
+export const mapStateToProps = (state, { navigation }) => {
+	const { entryId } = navigation.state.params
+
 	return {
-		onAddEntry: (entry) => dispatch(handleAddEntry(entry))
+		entryId
 	}
 }
 
-export default connect(null, mapDispatchToProps)(AddDeck)
+export const mapDispatchToProps = (dispatch) => {
+	return {
+		onAddCard: (entry, card) => dispatch(handleAddCard(entry, card))
+	}
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(AddCard)
+
+/* STYLES */
 /* STYLES */
 const styles = StyleSheet.create({
 	container: {
@@ -98,7 +139,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignSelf: 'stretch',
 		height: 50,
-		borderColor: black,
+		borderColor: purple,
 		borderWidth: 1,
 		borderRadius: 4
 	},

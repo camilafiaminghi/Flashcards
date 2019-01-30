@@ -15,7 +15,23 @@ class Deck extends Component {
 	}
 
 	static propTypes = {
-		deck: PropTypes.object.isRequired
+		deck: PropTypes.object.isRequired,
+		entryId: PropTypes.string.isRequired
+	}
+
+	toAddCard = () => {
+		const { entryId } = this.props
+
+		this.props.navigation.dispatch(NavigationActions.navigate({
+			routeName: 'AddCard',
+			params: { entryId }
+		}))
+	}
+
+	toQuiz = () => {
+		this.props.navigation.dispatch(NavigationActions.navigate({
+			routeName: 'Quiz'
+		}))
 	}
 
 	render() {
@@ -29,11 +45,15 @@ class Deck extends Component {
 						<Text style={styles.detail}>{deck.questions.length} { deck.questions.length === 1 && 'card' } { deck.questions.length !== 1 && 'cards' }</Text>
 					</View>
 
-					<TouchableOpacity style={[styles.input, styles.btn]}>
+					<TouchableOpacity
+						style={[styles.input, styles.btn]}
+						onPress={this.toAddCard}>
 						<Text style={styles.btnText}>{'Add Card'.toUpperCase()}</Text>
 					</TouchableOpacity>
 
-					<TouchableOpacity style={[styles.input, styles.btnInverse]}>
+					<TouchableOpacity
+						style={[styles.input, styles.btnInverse]}
+						onPress={this.toQuiz}>
 						<Text style={styles.btnInverseText}>{'Start Quiz'.toUpperCase()}</Text>
 					</TouchableOpacity>
 				</View>
@@ -46,14 +66,9 @@ export const mapStateToProps = ({ entries }, { navigation }) => {
 	const { entryId } = navigation.state.params
 
 	return {
+		entryId,
 		deck: entries[entryId]
 	}
-}
-
-export const mapDispatchToProps = (dispatch) => {
-  return {
-    handleEntries: () => dispatch(handleReceiveEntries())
-  }
 }
 
 export default connect(mapStateToProps)(Deck)
@@ -82,6 +97,7 @@ const styles = StyleSheet.create({
   	color: '#333333'
   },
   detail: {
+  	alignSelf: 'center',
   	fontSize: 16,
   	color: gray
   },
