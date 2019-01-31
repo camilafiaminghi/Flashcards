@@ -18,12 +18,6 @@ class Decks extends Component {
 		loaded: false
 	}
 
-	componentDidMount() {
-		const { handleEntries } = this.props
-		handleEntries()
-			.then(() => (this.setState({loaded: true})))
-	}
-
 	toAddDeck = () => {
 		this.props.navigation.dispatch(NavigationActions.navigate({
 			routeName: 'AddDeck'
@@ -35,6 +29,12 @@ class Decks extends Component {
 			routeName: 'Deck',
 			params: { entryId }
 		}))
+	}
+
+	componentDidMount() {
+		const { handleEntries } = this.props
+		handleEntries()
+			.then(() => (this.setState({loaded: true})))
 	}
 
 	render() {

@@ -58,10 +58,10 @@ const TabsContainer = (Platform.OS === 'ios')
 	? createBottomTabNavigator(Tabs, TabNavigationOptions)
 	: createMaterialTopTabNavigator(Tabs, TabNavigationOptions)
 
-const stackNavOptions = (headerColor, backColor) => ({
-  headerTintColor: headerColor,
+const stackNavOptions = (headerColor, backColor, title) => ({
+	headerTintColor: headerColor,
   headerStyle: {
-    backgroundColor: backColor,
+  	backgroundColor: backColor,
     marginTop: (- Constants.statusBarHeight)
   }
 })

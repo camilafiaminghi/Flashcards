@@ -29,8 +29,11 @@ class Deck extends Component {
 	}
 
 	toQuiz = () => {
+		const { entryId } = this.props
+
 		this.props.navigation.dispatch(NavigationActions.navigate({
-			routeName: 'Quiz'
+			routeName: 'Quiz',
+			params: { entryId }
 		}))
 	}
 
@@ -51,11 +54,13 @@ class Deck extends Component {
 						<Text style={styles.btnText}>{'Add Card'.toUpperCase()}</Text>
 					</TouchableOpacity>
 
-					<TouchableOpacity
-						style={[styles.input, styles.btnInverse]}
-						onPress={this.toQuiz}>
-						<Text style={styles.btnInverseText}>{'Start Quiz'.toUpperCase()}</Text>
-					</TouchableOpacity>
+					{ (deck.questions.length > 0) &&
+						<TouchableOpacity
+							style={[styles.input, styles.btnInverse]}
+							onPress={this.toQuiz}>
+							<Text style={styles.btnInverseText}>{'Start Quiz'.toUpperCase()}</Text>
+						</TouchableOpacity>
+					}
 				</View>
 			</View>
 		)

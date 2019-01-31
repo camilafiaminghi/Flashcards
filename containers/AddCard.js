@@ -10,7 +10,7 @@ import AppTextInput from '../components/AppTextInput'
 
 class AddCard extends Component {
 
-	static navigationOptions = () => {
+	static navigationOptions = ({ navigation }) => {
 		return {
 			title: 'New Card'
 		}
