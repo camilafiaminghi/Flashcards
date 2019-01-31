@@ -21,9 +21,9 @@ function entries (state = {}, action) {
 		case ADD_CARD:
 			return {
 				...state,
-				[action.entry] : {
-					...state[action.entry],
-					questions: [...state[action.entry].questions, action.card]
+				[action.entryId] : {
+					...state[action.entryId],
+					questions: [...state[action.entryId].questions, action.card]
 				}
 			}
 		default:

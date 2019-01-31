@@ -21,7 +21,7 @@ class AddCard extends Component {
 	}
 
 	state = {
-		form: {
+		card: {
 			title: '',
 			body: ''
 		},
@@ -35,8 +35,8 @@ class AddCard extends Component {
 	onInputChange = (name, value, valid) => {
 		this.setState((state) => ({
 			...state,
-			form: {
-				...state.form,
+			card: {
+				...state.card,
 				[name]: value
 			},
 			validation: {
@@ -62,11 +62,11 @@ class AddCard extends Component {
 	}
 
 	submit = () => {
-		const { onAddCard, entry } = this.props
-		const { form } = this.state
+		const { onAddCard, entryId } = this.props
+		const { card } = this.state
 
-		// onAddCard(entry, form)
-		// 	.then(this.toDecks) /* Navigate to Decks */
+		onAddCard(entryId, card)
+			.then(this.toDeck) /* Navigate to Deck */
 	}
 
 	render() {
@@ -111,7 +111,7 @@ export const mapStateToProps = (state, { navigation }) => {
 
 export const mapDispatchToProps = (dispatch) => {
 	return {
-		onAddCard: (entry, card) => dispatch(handleAddCard(entry, card))
+		onAddCard: (entryId, card) => dispatch(handleAddCard(entryId, card))
 	}
 }
 

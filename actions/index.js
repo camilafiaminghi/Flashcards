@@ -18,10 +18,10 @@ export function addEntry (entry) {
 	}
 }
 
-export function addCard (entry, card) {
+export function addCard (entryId, card) {
 	return {
 		type: ADD_CARD,
-		entry,
+		entryId,
 		card
 	}
 }
@@ -47,12 +47,12 @@ export function handleAddEntry (entry) {
 	}
 }
 
-export function handleAddCard (entry, card) {
+export function handleAddCard (entryId, card) {
 	return (dispatch) => {
 		// dispatch(/* LOADING */)
 
-		return addCardToDeck(entry, result)
-			.then(dispatch(addCard(entry, card)))
+		return addCardToDeck(entryId, card)
+			.then(dispatch(addCard(entryId, card)))
 			.catch((error) => console.log(error))
 	}
 }

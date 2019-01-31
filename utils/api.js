@@ -12,10 +12,6 @@ const obj = {
 	}
 }
 
-function generateUID () {
-  return Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)
-}
-
 export function setInitialData (data=obj) {
 	// return AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
 	return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
@@ -25,11 +21,11 @@ export function getDecks () {
 	return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
 }
 
-export function getDeck (title) {
+export function getDeck (entryId) {
 	return AsyncStorage.getItem(FLASHCARDS_STORAGE_KEY)
-		then((results) => {
+		.then((results) => {
 			const data = JSON.parse(results)
-			return data[title]
+			return data[entryId]
 		})
 }
 
@@ -42,11 +38,14 @@ export function saveDeckTitle ({ title }) {
 	}))
 }
 
-export function addCardToDeck (entry, card) {
-	return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
-		[entry.title]: {
-			...entry,
-			questions: [...entry.questions, card]
-		}
-	}))
+export function addCardToDeck (entryId, card) {
+	return getDeck(entryId)
+		.then((entry) => {
+			return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
+				[entryId]: {
+					...entry,
+					questions: [...entry.questions, card]
+				}
+			}))
+		})
 }
