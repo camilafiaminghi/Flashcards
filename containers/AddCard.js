@@ -118,7 +118,6 @@ export const mapDispatchToProps = (dispatch) => {
 export default connect(mapStateToProps, mapDispatchToProps)(AddCard)
 
 /* STYLES */
-/* STYLES */
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
