@@ -23,7 +23,7 @@ export class Quiz extends Component {
 
 	state = {
 		current: 0,
-		scores: 0,
+		scored: 0,
 		showAnswer: false
 	}
 
@@ -45,10 +45,14 @@ export class Quiz extends Component {
 	}
 
 	handleScore = () => {
+		const { scored } = this.state
 
-		/* increment score if correct is triggered */
-		/* change to next question */
-		/* if not has next question show score in percents */
+		this.setState((state) => ({
+			...state,
+			scored: scored + 1
+		}))
+
+		this.handleNext()
 	}
 
 	toggleSide = () => {
@@ -61,17 +65,21 @@ export class Quiz extends Component {
 	}
 
 	componentDidMount() {
-		const { current, scores } = this.state
+		const { current, scored } = this.state
 		const { entryId, questions, navigation } = this.props
 		navigation.setParams({current: `${entryId} ${current + 1}/${questions.length}`})
 	}
 
 	render() {
 		const { questions } = this.props
-		const { current, showAnswer, scores } = this.state
+		const { current, showAnswer, scored } = this.state
 
 		if ( current === questions.length ) {
-			return (<QuizScores scores={scores} />)
+			return (
+				<QuizScores
+					scored={scored}
+					len={questions.length} />
+			)
 		}
 
 		const { question, answer } = questions[current]

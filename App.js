@@ -8,6 +8,7 @@ import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNav
 import reducers from './reducers'
 import { white, purple, black, orange } from './utils/colors'
 import AppStatusBar from './components/AppStatusBar'
+/* VIEWS */
 import Decks from './containers/Decks'
 import Deck from './containers/Deck'
 import AddDeck from './containers/AddDeck'
