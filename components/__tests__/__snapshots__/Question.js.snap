@@ -1,0 +1,64 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Question /> matches snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexGrow": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <Text
+    style={
+      Object {
+        "color": "#333333",
+        "fontSize": 28,
+        "marginBottom": 20,
+        "marginLeft": 10,
+        "marginRight": 10,
+        "textAlign": "center",
+      }
+    }
+  >
+    What is React?
+  </Text>
+  <View
+    accessible={true}
+    isTVSelectable={true}
+    onResponderGrant={[Function]}
+    onResponderMove={[Function]}
+    onResponderRelease={[Function]}
+    onResponderTerminate={[Function]}
+    onResponderTerminationRequest={[Function]}
+    onStartShouldSetResponder={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "stretch",
+        "flexDirection": "row",
+        "height": 50,
+        "justifyContent": "center",
+        "marginLeft": 10,
+        "marginRight": 10,
+        "opacity": 1,
+        "padding": 4,
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#6f79a8",
+          "fontSize": 14,
+          "fontWeight": "bold",
+        }
+      }
+    >
+      SHOW ANSWER
+    </Text>
+  </View>
+</View>
+`;
