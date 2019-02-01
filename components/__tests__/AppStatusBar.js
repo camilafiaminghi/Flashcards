@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import renderer from 'react-test-renderer'
 import AppStatusBar from '../AppStatusBar'
 import { pColorDark } from '../../utils/colors'

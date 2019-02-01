@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { TouchableOpacity } from 'react-native'
 import renderer from 'react-test-renderer'
 import Answer from '../Answer'
 import card from '../../__helpers__/card'

@@ -10,7 +10,7 @@ class AppTextInput extends Component {
 		name: PropTypes.string.isRequired,
 		placeholder: PropTypes.string.isRequired,
 		maxLen: PropTypes.number.isRequired,
-		onInputChange: PropTypes.func
+		onInputChange: PropTypes.func.isRequired
 	}
 
 	state = {
