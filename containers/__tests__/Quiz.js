@@ -8,6 +8,8 @@ import { Quiz } from '../Quiz'
 import mockStore from '../../__helpers__/entries'
 
 let wrapper
+let instance
+let component
 const configStore = configureMockStore([thunk])
 const store = configStore(mockStore)
 const navigation = {
@@ -22,6 +24,7 @@ const navigation = {
 }
 const props = {
 	navigation,
+	entryId: Object.keys(mockStore)[0],
 	questions: mockStore[Object.keys(mockStore)[0]].questions
 }
 
@@ -29,13 +32,14 @@ describe('<Quiz />', () => {
 
 	beforeEach(() => {
 		wrapper = renderer.create(<Provider store={store}><Quiz {...props} /></Provider>)
+		// TEST SNAPSHOT wrapper.toJSON()
 
-		console.log(wrapper.toJSON())
+		instance = wrapper.root
+		component = shallow(<Quiz {...props} />)
 	})
 
-	it('should be present', () => {
-		// let component = renderer.create(<Quiz/>).toJSON()
-		// console.log(component)
+	it('should render', () => {
+		expect(wrapper).toBeTruthy()
 	})
 
 })

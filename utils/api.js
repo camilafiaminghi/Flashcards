@@ -1,18 +1,9 @@
 import { AsyncStorage } from 'react-native'
 export const FLASHCARDS_STORAGE_KEY = 'Flashcards:decks'
 
-const obj = {
-	'JavaScript' : {
-		title: 'JavaScript',
-		questions: []
-	},
-	'React' : {
-		title: 'React',
-		questions: []
-	}
-}
+import mockStorage from './../__helpers__/entries'
 
-export function setInitialData (data=obj) {
+export function setInitialData (data=mockStorage) {
 	// return AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
 	return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
 }

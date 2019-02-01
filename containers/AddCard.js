@@ -22,12 +22,12 @@ class AddCard extends Component {
 
 	state = {
 		card: {
-			title: '',
-			body: ''
+			question: '',
+			answer: ''
 		},
 		validation: {
-			title: false,
-			body: false
+			question: false,
+			answer: false
 		},
 		valid: false
 	}
@@ -77,13 +77,13 @@ class AddCard extends Component {
 				<KeyboardAvoidingView behavior='padding' style={styles.card}>
 
 					<AppTextInput
-						name='title'
+						name='question'
 						placeholder='Question? (max 122 characters)'
 						maxLen={122}
 						onInputChange={this.onInputChange} />
 
 					<AppTextInput
-						name='body'
+						name='answer'
 						placeholder='Answer (max 255 characters)'
 						maxLen={255}
 						onInputChange={this.onInputChange} />

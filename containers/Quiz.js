@@ -4,6 +4,9 @@ import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { gray, lightPurp, purple, white } from '../utils/colors'
+import Question from './../components/Question'
+import Answer from './../components/Answer'
+import QuizScores from './../components/QuizScores'
 
 export class Quiz extends Component {
 
@@ -14,33 +17,30 @@ export class Quiz extends Component {
 	}
 
 	static propTypes = {
+		entryId: PropTypes.string.isRequired,
 		questions: PropTypes.array.isRequired
 	}
 
 	state = {
 		current: 0,
-		score: 0
+		scores: 0,
+		showAnswer: false
 	}
 
-	updateTitle = () => {
-		const { current } = this.state
-		const { entryId, questions, navigation } = this.props
-
-		navigation.setParams({current: `${entryId} ${current + 1}/${questions.length}`})
-	}
-
-	next = () => {
+	handleNext = () => {
 		const { entryId, questions, navigation } = this.props
 		const { current } = this.state
 
-		if ( current !== questions.length ) {
-			this.setState((state) => ({
-				...state,
-				current: state.current + 1
-			}))
+		this.setState((state) => ({
+			...state,
+			current: state.current + 1,
+			showAnswer: false
+		}))
 
-			this.updateTitle()
-			// navigation.setParams({current: `${entryId} ${next}/${questions.length}`})
+		if ( current + 1 === questions.length ) {
+			navigation.setParams({current: `${entryId} Scores`})
+		} else {
+			navigation.setParams({current: `${entryId} ${current + 2}/${questions.length}`})
 		}
 	}
 
@@ -51,40 +51,46 @@ export class Quiz extends Component {
 		/* if not has next question show score in percents */
 	}
 
+	toggleSide = () => {
+		const { showAnswer } = this.state
+
+		this.setState((state) => ({
+			...state,
+			showAnswer: !showAnswer
+		}))
+	}
+
 	componentDidMount() {
-		this.updateTitle()
+		const { current, scores } = this.state
+		const { entryId, questions, navigation } = this.props
+		navigation.setParams({current: `${entryId} ${current + 1}/${questions.length}`})
 	}
 
 	render() {
 		const { questions } = this.props
-		const { current } = this.state
+		const { current, showAnswer, scores } = this.state
 
-		if ( (current - 1) === questions.length ) {
-			return (
-				<View style={styles.container}>
-					<View style={styles.card}>
-						<Text>Quiz Finished</Text>
-					</View>
-				</View>
-			)
+		if ( current === questions.length ) {
+			return (<QuizScores scores={scores} />)
 		}
+
+		const { question, answer } = questions[current]
 
 		return (
 			<View style={styles.container}>
 				<View style={styles.card}>
-					<Text>Quiz</Text>
+					{ (!showAnswer) &&
+						<Question
+							question={question}
+							toggleSide={this.toggleSide} />
+					}
 
-					<TouchableOpacity
-						style={[styles.input, styles.btn]}
-						onPress={this.handleScore}>
-						<Text style={styles.btnText}>Correct</Text>
-					</TouchableOpacity>
-
-					<TouchableOpacity
-						style={[styles.input, styles.btn]}
-						onPress={this.next}>
-						<Text style={styles.btnText}>Incorrect</Text>
-					</TouchableOpacity>
+					{ (showAnswer) &&
+						<Answer
+							answer={answer}
+							handleScore={this.handleScore}
+							handleNext={this.handleNext} />
+					}
 				</View>
 			</View>
 		)
@@ -120,26 +126,5 @@ export const styles = StyleSheet.create({
   },
   cardTitle: {
   	marginBottom: 40,
-  },
-  input: {
-		height: 50,
-		borderColor: purple,
-		borderWidth: 1,
-		borderRadius: 4,
-		margin: 5,
-		paddingTop: 4,
-		paddingBottom: 4,
-		paddingRight: 24,
-		paddingLeft: 24,
-		minWidth: 160
-	},
-	btn: {
-		alignItems: 'center',
-		justifyContent: 'center',
-	},
-	btnText: {
-		fontSize: 14,
-		fontWeight: 'bold',
-		color: purple
-	},
+  }
 })
