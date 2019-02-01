@@ -1,21 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { gray, black } from '../utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
 const QuizScores = ({ scored, len }) => {
-	const correct = (scored * 100 / len).toFixed(2)
+	const correct = Math.floor(scored * 100 / len)
 
 	return (
 		<View style={styles.container}>
 			<View style={styles.row}>
-				<Text style={[styles.text, {fontSize: 90, }]}>{correct}</Text>
-				<Text style={[styles.text, {fontSize: 50}]}>%</Text>
+				<Text style={[styles.detail, {fontSize: 20}]}>{scored}/{len}</Text>
 			</View>
+
 			<View style={styles.row}>
-				<Text style={[styles.detail, {fontSize: 18}]}>correct </Text>
-				<Text style={[styles.detail, {fontSize: 16}]}>{scored}/{len}</Text>
+				<Text style={[styles.text, {fontSize: 90, fontWeight: 'bold'}]}>{correct}</Text>
+				<Text style={[styles.text, {fontSize: 40, fontWeight: 'bold'}]}>%</Text>
 			</View>
+
+			<Text style={[styles.text, {fontSize: 30}]}>Scored</Text>
 		</View>
 	)
 }
@@ -43,10 +45,9 @@ export const styles = StyleSheet.create({
   },
   text: {
   	textAlign: 'center',
-		fontWeight: 'bold',
-		color: black
+		color: textColor
   },
 	detail: {
-  	color: gray
+  	color: textColor
   }
 })

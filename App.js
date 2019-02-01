@@ -6,7 +6,7 @@ import { Platform, StyleSheet, Text, View } from 'react-native'
 import { Constants } from 'expo'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 import reducers from './reducers'
-import { white, purple, black, orange } from './utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from './utils/colors'
 import AppStatusBar from './components/AppStatusBar'
 /* VIEWS */
 import Decks from './containers/Decks'
@@ -40,10 +40,15 @@ const TabNavigationOptions = {
 		header: null
 	},
 	tabBarOptions: {
-		activeTintColor: (Platform.OS === 'ios') ? purple : white,
+		activeTintColor: (Platform.OS === 'ios') ? textColorInverse: textColorInverse,
+		activeBackgroundColor: pColorDark,
+		indicatorStyle: {
+			backgroundColor: textColor,
+			borderTopWidth: 2
+    },
 		style: {
-			height: 56,
-			backgroundColor: (Platform.OS === 'ios') ? white : purple,
+			height: 50,
+			backgroundColor: pColorDark,
 			shadowColor: 'rgba(0, 0, 0, 0.24)',
 			shadowOffset: {
 				width: 0,
@@ -76,15 +81,15 @@ const AppNavigator = createStackNavigator({
   },
   Deck: {
     screen: Deck,
-    navigationOptions: stackNavOptions(white, purple)
+    navigationOptions: stackNavOptions(textColorInverse, pColorDark)
   },
   Quiz: {
     screen: Quiz,
-    navigationOptions: stackNavOptions(white, black)
+    navigationOptions: stackNavOptions(textColorInverse, pColorDark)
   },
   AddCard: {
     screen: AddCard,
-    navigationOptions: stackNavOptions(white, black)
+    navigationOptions: stackNavOptions(textColorInverse, pColorDark)
   }
 })
 
@@ -94,7 +99,7 @@ export default class App extends Component {
 	render() {
     return (
     	<Provider store={store}>
-    		<AppStatusBar backgroundColor={purple}/>
+    		<AppStatusBar backgroundColor={pColorDark}/>
 	      <AppNavigatorContainer />
 	    </Provider>
     );

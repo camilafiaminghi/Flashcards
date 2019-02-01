@@ -1,24 +1,27 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { gray, lightPurp, purple, white } from '../utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
+import { Ionicons } from '@expo/vector-icons'
 
 const Answer = ({ answer, handleScore, handleNext }) => {
 	return (
 		<View style={styles.container}>
 			<Text style={styles.text}>{answer}</Text>
 
-			<TouchableOpacity
-				style={[styles.input, styles.btnInverse]}
-				onPress={handleScore}>
-				<Text style={styles.btnInverseText}>Correct</Text>
-			</TouchableOpacity>
+			<View style={styles.row}>
+				<TouchableOpacity
+					style={[styles.input, styles.btn]}
+					onPress={handleNext}>
+					<Ionicons name='ios-close-circle' size={50} color={pColorDark} />
+				</TouchableOpacity>
 
-			<TouchableOpacity
-				style={[styles.input, styles.btn]}
-				onPress={handleNext}>
-				<Text style={styles.btnText}>Incorrect</Text>
-			</TouchableOpacity>
+				<TouchableOpacity
+					style={[styles.input, styles.btn]}
+					onPress={handleScore}>
+					<Ionicons name='ios-checkbox' size={50} color={pColorDark} />
+				</TouchableOpacity>
+			</View>
 		</View>
 	)
 }
@@ -39,44 +42,35 @@ export const styles = StyleSheet.create({
   	alignItems: 'center',
   	justifyContent: 'center'
   },
+  row: {
+  	flexDirection: 'row',
+  	alignItems: 'center',
+  	marginRight: 10,
+		marginLeft: 10
+  },
   text: {
   	textAlign: 'center',
-		fontSize: 24,
+		fontSize: 28,
 		marginRight: 10,
 		marginLeft: 10,
 		marginBottom: 20,
-		color: '#333333'
+		color: textColor
   },
   input: {
+		flexDirection: 'row',
+		alignSelf: 'stretch',
 		height: 50,
-		borderColor: purple,
-		borderWidth: 1,
-		borderRadius: 4,
-		margin: 5,
-		paddingTop: 4,
-		paddingBottom: 4,
-		paddingRight: 24,
-		paddingLeft: 24,
-		minWidth: 160
 	},
 	btn: {
 		alignItems: 'center',
 		justifyContent: 'center',
+		padding: 4,
+		marginRight: 10,
+		marginLeft: 10
 	},
 	btnText: {
 		fontSize: 14,
 		fontWeight: 'bold',
-		color: purple
-	},
-	btnInverse: {
-		backgroundColor: purple,
-		alignItems: 'center',
-		justifyContent: 'center',
-		padding: 4,
-	},
-	btnInverseText: {
-		fontSize: 14,
-		fontWeight: 'bold',
-		color: white
+		color: pColorDark
 	}
 })

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
 import { handleAddEntry } from '../actions'
 import { isValid } from '../utils/validation'
-import { gray, black, purple, white } from '../utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 import AppTextInput from '../components/AppTextInput'
 
 class AddDeck extends Component {
@@ -16,7 +16,8 @@ class AddDeck extends Component {
 
 	state = {
 		title: '',
-		valid: false
+		valid: false,
+		resetValue: false
 	}
 
 	toDecks = () => {
@@ -30,6 +31,7 @@ class AddDeck extends Component {
 		const { title } = this.state
 
 		onAddEntry({ title })
+			.then(this.setState((state) => ({...state, resetValue: true})))
 			.then(this.toDecks) /* Navigate to Decks */
 	}
 
@@ -41,8 +43,19 @@ class AddDeck extends Component {
 		}))
 	}
 
+	componentDidMount() {
+    this.didFocusListener = this.props.navigation.addListener(
+      'didFocus',
+      () => { this.setState((state) => ({...state, resetValue: false})) },
+    )
+  }
+
+  componentWillUnmount() {
+    this.didFocusListener.remove();
+  }
+
 	render() {
-		const { valid } = this.state
+		const { valid, resetValue } = this.state
 
 		return (
 			<View style={styles.container}>
@@ -50,17 +63,20 @@ class AddDeck extends Component {
 
 					<Text style={styles.text}>What the title of your new deck?</Text>
 
-					<AppTextInput
-						name='title'
-						placeholder='Deck Title (max 55 characters)'
-						maxLen={55}
-						onInputChange={this.onInputChange} />
+					{ (!resetValue) &&
+						<AppTextInput
+							name='title'
+							placeholder='Deck Title (max 55 characters)'
+							maxLen={55}
+							onInputChange={this.onInputChange}
+							resetValue={resetValue} />
+					}
 
-		      <TouchableOpacity
-		      	style={valid ? [styles.input, styles.btn] : [styles.input, styles.btn, {opacity: .7}]}
+				  <TouchableOpacity
+		      	style={[styles.input, styles.btn]}
 		      	disabled={!valid}
 		      	onPress={this.submit}>
-		      	<Text style={styles.btnText}>{'submit'.toUpperCase()}</Text>
+		      	<Text style={ valid ? styles.btnText : styles.btnDisabledText }>{'submit'.toUpperCase()}</Text>
 		      </TouchableOpacity>
 
 				</KeyboardAvoidingView>
@@ -81,8 +97,9 @@ export default connect(null, mapDispatchToProps)(AddDeck)
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'stretch',
-		backgroundColor: '#f2f2f2',
+    backgroundColor: sColorLight,
+    paddingTop: 4,
+    paddingBottom: 4
 	},
 	card: {
 		flex: 1,
@@ -90,36 +107,43 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'center',
 		backgroundColor: 'white',
-		margin: 8,
-		padding: 8,
-		borderRadius: 4
+		marginTop: 4,
+  	marginBottom: 4,
+  	marginRight: 8,
+  	marginLeft: 8,
+  	borderRadius: 3,
+  	padding: 20
+	},
+	text: {
+		textAlign: 'center',
+  	fontSize: 24,
+		marginRight: 24,
+		marginLeft: 24,
+		color: textColor
 	},
 	input: {
 		flexDirection: 'row',
 		alignSelf: 'stretch',
 		height: 50,
-		borderColor: black,
-		borderWidth: 1,
-		borderRadius: 4
-	},
-	text: {
-		textAlign: 'center',
-		fontSize: 20,
-		marginRight: 10,
-		marginLeft: 10,
-		color: '#333333'
+		borderBottomColor: pColorDark,
+		borderBottomWidth: 1,
+		borderRadius: 3,
 	},
 	btn: {
-		backgroundColor: black,
 		alignItems: 'center',
 		justifyContent: 'center',
 		padding: 4,
 		marginRight: 10,
 		marginLeft: 10
 	},
+	btnDisabledText: {
+		fontSize: 14,
+		fontWeight: 'bold',
+		color: pColorLight
+	},
 	btnText: {
 		fontSize: 14,
 		fontWeight: 'bold',
-		color: white
+		color: pColorDark
 	}
 })

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { gray, lightPurp, purple, white } from '../utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
 class Deck extends Component {
 
@@ -56,9 +56,9 @@ class Deck extends Component {
 
 					{ (deck.questions.length > 0) &&
 						<TouchableOpacity
-							style={[styles.input, styles.btnInverse]}
+							style={[styles.input, styles.btn]}
 							onPress={this.toQuiz}>
-							<Text style={styles.btnInverseText}>{'Start Quiz'.toUpperCase()}</Text>
+							<Text style={styles.btnText}>{'Start Quiz'.toUpperCase()}</Text>
 						</TouchableOpacity>
 					}
 				</View>
@@ -82,7 +82,9 @@ export default connect(mapStateToProps)(Deck)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2'
+    backgroundColor: sColorLight,
+    paddingTop: 4,
+    paddingBottom: 4
   },
   card: {
   	flex: 1,
@@ -98,44 +100,35 @@ const styles = StyleSheet.create({
   	marginBottom: 40,
   },
   text: {
+  	textAlign: 'center',
   	fontSize: 26,
-  	color: '#333333'
+		marginRight: 24,
+		marginLeft: 24,
+		color: textColor
   },
   detail: {
   	alignSelf: 'center',
   	fontSize: 16,
-  	color: gray
+  	color: pColorLight
   },
   input: {
+		flexDirection: 'row',
+		alignSelf: 'stretch',
 		height: 50,
-		borderColor: purple,
-		borderWidth: 1,
-		borderRadius: 4,
-		margin: 5,
-		paddingTop: 4,
-		paddingBottom: 4,
-		paddingRight: 24,
-		paddingLeft: 24,
-		minWidth: 160
+		borderBottomColor: pColorDark,
+		borderBottomWidth: 1,
+		borderRadius: 3,
 	},
 	btn: {
 		alignItems: 'center',
 		justifyContent: 'center',
+		padding: 4,
+		marginRight: 10,
+		marginLeft: 10
 	},
 	btnText: {
 		fontSize: 14,
 		fontWeight: 'bold',
-		color: purple
-	},
-	btnInverse: {
-		backgroundColor: purple,
-		alignItems: 'center',
-		justifyContent: 'center',
-		padding: 4,
-	},
-	btnInverseText: {
-		fontSize: 14,
-		fontWeight: 'bold',
-		color: white
+		color: pColorDark
 	}
 })

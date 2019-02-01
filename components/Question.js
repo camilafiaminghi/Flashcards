@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { gray, lightPurp, purple, white } from '../utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
 const Question = ({ question, toggleSide }) => {
 	return (
@@ -34,31 +34,27 @@ export const styles = StyleSheet.create({
   },
   text: {
   	textAlign: 'center',
-		fontSize: 24,
+		fontSize: 28,
 		marginRight: 10,
 		marginLeft: 10,
 		marginBottom: 20,
-		color: '#333333'
+		color: textColor
   },
   input: {
+		flexDirection: 'row',
+		alignSelf: 'stretch',
 		height: 50,
-		borderColor: purple,
-		borderWidth: 1,
-		borderRadius: 4,
-		margin: 5,
-		paddingTop: 4,
-		paddingBottom: 4,
-		paddingRight: 24,
-		paddingLeft: 24,
-		minWidth: 160
 	},
 	btn: {
 		alignItems: 'center',
 		justifyContent: 'center',
+		padding: 4,
+		marginRight: 10,
+		marginLeft: 10
 	},
 	btnText: {
 		fontSize: 14,
 		fontWeight: 'bold',
-		color: purple
+		color: pColorDark
 	}
 })

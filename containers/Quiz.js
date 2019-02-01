@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
-import { gray, lightPurp, purple, white } from '../utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 import Question from './../components/Question'
 import Answer from './../components/Answer'
 import QuizScores from './../components/QuizScores'
@@ -38,7 +38,7 @@ export class Quiz extends Component {
 		}))
 
 		if ( current + 1 === questions.length ) {
-			navigation.setParams({current: `${entryId} Scores`})
+			navigation.setParams({current: `${entryId}`})
 		} else {
 			navigation.setParams({current: `${entryId} ${current + 2}/${questions.length}`})
 		}
@@ -120,7 +120,9 @@ export default connect(mapStateToProps)(Quiz)
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2'
+    backgroundColor: sColorLight,
+    paddingTop: 4,
+    paddingBottom: 4
   },
   card: {
   	flex: 1,

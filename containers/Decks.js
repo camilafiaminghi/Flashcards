@@ -4,7 +4,7 @@ import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
 import { handleReceiveEntries } from '../actions'
-import { gray, lightPurp, purple, white, black } from '../utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
 class Decks extends Component {
 
@@ -49,7 +49,7 @@ class Decks extends Component {
 						<TouchableOpacity
 							style={[styles.btn, styles.input]}
 							onPress={this.toAddDeck}>
-							<Text style={styles.btnText}>{'Create a Deck'.toUpperCase()}</Text>
+							<Text style={styles.btnText}>{'New Deck'.toUpperCase()}</Text>
 						</TouchableOpacity>
 					</View>
 				</View>
@@ -101,7 +101,9 @@ export default connect(mapStateToProps, mapDispatchToProps)(Decks)
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f2f2f2'
+    backgroundColor: sColorLight,
+    paddingTop: 4,
+    paddingBottom: 4
   },
   item: {
   	flex: 1,
@@ -113,30 +115,32 @@ const styles = StyleSheet.create({
   	marginBottom: 4,
   	marginRight: 8,
   	marginLeft: 8,
-  	borderRadius: 4,
+  	borderRadius: 3,
   	padding: 20
   },
   text: {
   	fontSize: 18,
-  	color: black
+  	textAlign: 'center',
+  	color: textColor
   },
   detail: {
   	fontSize: 14,
-  	color: gray
+  	color: pColor
   },
   textEmpty: {
-  	fontSize: 20,
+  	textAlign: 'center',
+  	fontSize: 24,
 		marginRight: 10,
 		marginLeft: 10,
-		color: '#333333'
+		color: textColor
   },
   input: {
 		flexDirection: 'row',
 		alignSelf: 'stretch',
 		height: 50,
-		borderColor: purple,
-		borderWidth: 1,
-		borderRadius: 4,
+		borderBottomColor: pColorDark,
+		borderBottomWidth: 1,
+		borderRadius: 3,
 		margin: 10
 	},
 	btn: {
@@ -147,6 +151,6 @@ const styles = StyleSheet.create({
 	btnText: {
 		fontSize: 14,
 		fontWeight: 'bold',
-		color: purple
+		color: pColorDark
 	}
 })

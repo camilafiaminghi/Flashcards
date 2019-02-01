@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, View, Text, TextInput } from 'react-native'
 import { validationRules } from '../utils/validation'
-import { gray, black } from '../utils/colors'
+import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
 class AppTextInput extends Component {
 
@@ -43,7 +43,7 @@ class AppTextInput extends Component {
 		return (
 			<View style={styles.container}>
 				<TextInput
-	        style={[styles.input, styles.inputText]}
+					style={[styles.input, styles.inputText]}
 	        placeholder={placeholder}
 	        onChangeText={this.handleValidation}
 	        value={text} />
@@ -67,15 +67,15 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignSelf: 'stretch',
 		height: 50,
-		borderColor: gray,
-		borderWidth: 1,
-		borderRadius: 4
+		borderBottomColor: pColorDark,
+		borderBottomWidth: 1,
+		borderRadius: 3
 	},
 	inputText: {
 		padding: 8
 	},
 	text: {
 		fontSize: 12,
-		color: black
+		color: textColor
 	}
 })

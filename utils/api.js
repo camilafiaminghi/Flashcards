@@ -3,7 +3,7 @@ export const FLASHCARDS_STORAGE_KEY = 'Flashcards:decks'
 
 import mockStorage from './../__helpers__/entries'
 
-export function setInitialData (data=mockStorage) {
+export function setInitialData (data={}) {
 	// return AsyncStorage.setItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
 	return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify(data))
 }
