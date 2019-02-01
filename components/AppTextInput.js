@@ -44,6 +44,7 @@ class AppTextInput extends Component {
 			<View style={styles.container}>
 				<TextInput
 					style={[styles.input, styles.inputText]}
+					placeholderTextColor={pColorDark}
 	        placeholder={placeholder}
 	        onChangeText={this.handleValidation}
 	        value={text} />
@@ -68,7 +69,7 @@ const styles = StyleSheet.create({
 		alignSelf: 'stretch',
 		height: 50,
 		borderBottomColor: pColorDark,
-		borderBottomWidth: 1,
+		borderBottomWidth: 2,
 		borderRadius: 3
 	},
 	inputText: {
