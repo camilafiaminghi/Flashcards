@@ -8,5 +8,5 @@ To run the application in developer mode run:
 
 ## The app was developed for android, to create the .apk
 Use expo to create packages, follow instructions on terminal.
-- $ npm install -g exp
-- $ exp build:android 
+- $ npm install -g expo
+- $ expo build:android 
