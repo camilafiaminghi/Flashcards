@@ -1,0 +1,100 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<QuizScores /> matches snapshot 1`] = `
+<View
+  style={
+    Object {
+      "alignItems": "center",
+      "flex": 1,
+      "flexGrow": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginLeft": 10,
+        "marginRight": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#333333",
+          },
+          Object {
+            "fontSize": 20,
+          },
+        ]
+      }
+    >
+      5
+      /
+      10
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flexDirection": "row",
+        "marginLeft": 10,
+        "marginRight": 10,
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#333333",
+            "textAlign": "center",
+          },
+          Object {
+            "fontSize": 90,
+            "fontWeight": "bold",
+            "marginRight": -10,
+          },
+        ]
+      }
+    >
+      50
+    </Text>
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#333333",
+            "textAlign": "center",
+          },
+          Object {
+            "fontSize": 60,
+          },
+        ]
+      }
+    >
+      %
+    </Text>
+  </View>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#333333",
+          "textAlign": "center",
+        },
+        Object {
+          "fontSize": 30,
+        },
+      ]
+    }
+  >
+    Scored
+  </Text>
+</View>
+`;

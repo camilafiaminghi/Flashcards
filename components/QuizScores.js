@@ -4,7 +4,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
 const QuizScores = ({ scored, len }) => {
-	const correct = Math.floor(scored * 100 / len)
+	const percentageScored = Math.floor(scored * 100 / len)
 
 	return (
 		<View style={styles.container}>
@@ -13,7 +13,7 @@ const QuizScores = ({ scored, len }) => {
 			</View>
 
 			<View style={styles.row}>
-				<Text style={[styles.text, {fontSize: 90, fontWeight: 'bold', marginRight: -10}]}>{correct}</Text>
+				<Text style={[styles.text, {fontSize: 90, fontWeight: 'bold', marginRight: -10}]}>{percentageScored}</Text>
 				<Text style={[styles.text, {fontSize: 60}]}>%</Text>
 			</View>
 
