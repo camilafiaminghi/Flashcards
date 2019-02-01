@@ -4,6 +4,8 @@ import renderer from 'react-test-renderer'
 import QuizScores from '../QuizScores'
 import card from '../../__helpers__/card'
 
+jest.useFakeTimers()
+
 let wrapper
 let instance
 let component

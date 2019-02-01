@@ -6,8 +6,7 @@ To run the application in developer mode run:
 - $ yarn install
 - $ expo start
 
-## Create the .apk or .ipa packages
+## The app was developed for android, to create the .apk
 Use expo to create packages, follow instructions on terminal.
 - $ npm install -g exp
-- $ exp build:ios
 - $ exp build:android 

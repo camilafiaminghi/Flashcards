@@ -40,12 +40,17 @@ exports[`<QuizScores /> matches snapshot 1`] = `
   </View>
   <View
     style={
-      Object {
-        "alignItems": "center",
-        "flexDirection": "row",
-        "marginLeft": 10,
-        "marginRight": 10,
-      }
+      Array [
+        Object {
+          "alignItems": "center",
+          "flexDirection": "row",
+          "marginLeft": 10,
+          "marginRight": 10,
+        },
+        Object {
+          "marginRight": -10,
+        },
+      ]
     }
   >
     <Text
@@ -58,7 +63,7 @@ exports[`<QuizScores /> matches snapshot 1`] = `
           Object {
             "fontSize": 90,
             "fontWeight": "bold",
-            "marginRight": -10,
+            "marginRight": -2,
           },
         ]
       }

@@ -8,7 +8,6 @@ import { Quiz } from '../Quiz'
 import mockStore from '../../__helpers__/entries'
 
 let wrapper
-let instance
 let component
 const configStore = configureMockStore([thunk])
 const store = configStore(mockStore)
@@ -32,11 +31,12 @@ describe('<Quiz />', () => {
 
 	beforeEach(() => {
 		wrapper = renderer.create(<Provider store={store}><Quiz {...props} /></Provider>)
-		// TEST SNAPSHOT wrapper.toJSON()
-
-		instance = wrapper.root
 		component = shallow(<Quiz {...props} />)
 	})
+
+	it('matches snapshot', () => {
+    expect(wrapper.toJSON()).toMatchSnapshot()
+  });
 
 	it('should render', () => {
 		expect(wrapper).toBeTruthy()

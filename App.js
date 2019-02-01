@@ -7,6 +7,7 @@ import { Constants } from 'expo'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
 import reducers from './reducers'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from './utils/colors'
+import { setLocalNotification } from './utils/helpers'
 import AppStatusBar from './components/AppStatusBar'
 /* VIEWS */
 import Decks from './containers/Decks'
@@ -96,6 +97,10 @@ const AppNavigator = createStackNavigator({
 const AppNavigatorContainer = createAppContainer(AppNavigator)
 
 export default class App extends Component {
+	componentDidMount() {
+		setLocalNotification()
+	}
+
 	render() {
     return (
     	<Provider store={store}>

@@ -1,33 +1,40 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
+import { clearLocalNotification, setLocalNotification } from '../utils/helpers'
 
-const QuizScores = ({ scored, len }) => {
-	const percentageScored = Math.floor(scored * 100 / len)
+export default class QuizScores extends Component {
+	static propTypes = {
+		scored: PropTypes.number.isRequired,
+		len: PropTypes.number.isRequired
+	}
 
-	return (
-		<View style={styles.container}>
-			<View style={styles.row}>
-				<Text style={[styles.detail, {fontSize: 20}]}>{scored}/{len}</Text>
+	componentDidMount() {
+		clearLocalNotification()
+			.then(setLocalNotification)
+	}
+
+	render(){
+		const { scored, len } = this.props
+		const percentageScored = Math.floor(scored * 100 / len)
+
+		return (
+			<View style={styles.container}>
+				<View style={styles.row}>
+					<Text style={[styles.detail, {fontSize: 20}]}>{scored}/{len}</Text>
+				</View>
+
+				<View style={[styles.row, {marginRight: -10}]}>
+					<Text style={[styles.text, {fontSize: 90, fontWeight: 'bold', marginRight: -2}]}>{percentageScored}</Text>
+					<Text style={[styles.text, {fontSize: 60}]}>%</Text>
+				</View>
+
+				<Text style={[styles.text, {fontSize: 30}]}>Scored</Text>
 			</View>
-
-			<View style={styles.row}>
-				<Text style={[styles.text, {fontSize: 90, fontWeight: 'bold', marginRight: -10}]}>{percentageScored}</Text>
-				<Text style={[styles.text, {fontSize: 60}]}>%</Text>
-			</View>
-
-			<Text style={[styles.text, {fontSize: 30}]}>Scored</Text>
-		</View>
-	)
+		)
+	}
 }
-
-QuizScores.propTypes = {
-	scored: PropTypes.number.isRequired,
-	len: PropTypes.number.isRequired
-}
-
-export default QuizScores
 
 /* STYLES */
 export const styles = StyleSheet.create({
