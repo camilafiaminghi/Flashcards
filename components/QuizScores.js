@@ -13,8 +13,8 @@ const QuizScores = ({ scored, len }) => {
 			</View>
 
 			<View style={styles.row}>
-				<Text style={[styles.text, {fontSize: 90, fontWeight: 'bold'}]}>{correct}</Text>
-				<Text style={[styles.text, {fontSize: 40, fontWeight: 'bold'}]}>%</Text>
+				<Text style={[styles.text, {fontSize: 90, fontWeight: 'bold', marginRight: -10}]}>{correct}</Text>
+				<Text style={[styles.text, {fontSize: 60}]}>%</Text>
 			</View>
 
 			<Text style={[styles.text, {fontSize: 30}]}>Scored</Text>
