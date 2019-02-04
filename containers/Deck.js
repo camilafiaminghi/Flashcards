@@ -34,11 +34,11 @@ class Deck extends Component {
 	}
 
 	toQuiz = () => {
-		const { deckId } = this.props
+		const { deck } = this.props
 
 		this.props.navigation.dispatch(NavigationActions.navigate({
 			routeName: 'Quiz',
-			params: { deckId }
+			params: { deck }
 		}))
 	}
 

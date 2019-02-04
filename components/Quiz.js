@@ -1,24 +1,17 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { NavigationActions } from 'react-navigation'
-import { connect } from 'react-redux'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 import Question from './../components/Question'
 import Answer from './../components/Answer'
 import QuizScores from './../components/QuizScores'
 
-export class Quiz extends Component {
+export default class Quiz extends Component {
 
 	static navigationOptions = ({ navigation }) => {
 		return {
 			title: navigation.getParam('current', 'Quiz')
 		}
-	}
-
-	static propTypes = {
-		deckId: PropTypes.string.isRequired,
-		questions: PropTypes.array.isRequired
 	}
 
 	state = {
@@ -28,8 +21,9 @@ export class Quiz extends Component {
 	}
 
 	handleNext = () => {
-		const { deckId, questions, navigation } = this.props
+		const { navigation } = this.props
 		const { current } = this.state
+		const { deck } = navigation.state.params
 
 		this.setState((state) => ({
 			...state,
@@ -37,10 +31,10 @@ export class Quiz extends Component {
 			showAnswer: false
 		}))
 
-		if ( current + 1 === questions.length ) {
-			navigation.setParams({current: `${deckId}`})
+		if ( current + 1 === deck.questions.length ) {
+			navigation.setParams({current: `${deck.title}`})
 		} else {
-			navigation.setParams({current: `${deckId} ${current + 2}/${questions.length}`})
+			navigation.setParams({current: `${deck.title} ${current + 2}/${deck.questions.length}`})
 		}
 	}
 
@@ -65,24 +59,26 @@ export class Quiz extends Component {
 	}
 
 	componentDidMount() {
-		const { current, scored } = this.state
-		const { deckId, questions, navigation } = this.props
-		navigation.setParams({current: `${deckId} ${current + 1}/${questions.length}`})
+		const { current } = this.state
+		const { navigation } = this.props
+		const { deck } = navigation.state.params
+
+		navigation.setParams({current: `${deck.title} ${current + 1}/${deck.questions.length}`})
 	}
 
 	render() {
-		const { questions } = this.props
 		const { current, showAnswer, scored } = this.state
+		const { deck } = this.props.navigation.state.params
 
-		if ( current === questions.length ) {
+		if ( current === deck.questions.length ) {
 			return (
 				<QuizScores
 					scored={scored}
-					len={questions.length} />
+					len={deck.questions.length} />
 			)
 		}
 
-		const { question, answer } = questions[current]
+		const { question, answer } = deck.questions[current]
 
 		return (
 			<View style={styles.container}>
@@ -105,19 +101,8 @@ export class Quiz extends Component {
 	}
 }
 
-export const mapStateToProps = ({ decks }, { navigation }) => {
-	const { deckId } = navigation.state.params
-
-	return {
-		deckId,
-		questions: decks[deckId].questions
-	}
-}
-
-export default connect(mapStateToProps)(Quiz)
-
 /* STYLES */
-export const styles = StyleSheet.create({
+styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: sColorLight,

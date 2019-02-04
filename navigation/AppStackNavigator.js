@@ -5,7 +5,7 @@ import { textColorInverse, pColorDark } from '../utils/colors'
 import AppTabs from './AppTabs'
 import Deck from '../containers/Deck'
 import AddCard from '../containers/AddCard'
-import Quiz from '../containers/Quiz'
+import Quiz from '../components/Quiz'
 
 const stackNavOptions = (headerColor, backColor, title) => ({
 	headerTintColor: headerColor,

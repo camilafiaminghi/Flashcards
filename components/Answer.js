@@ -35,7 +35,7 @@ Answer.propTypes = {
 export default Answer
 
 /* STYLES */
-export const styles = StyleSheet.create({
+const styles = StyleSheet.create({
   container: {
     flex: 1,
   	flexGrow: 1,
