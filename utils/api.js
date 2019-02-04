@@ -20,7 +20,7 @@ export function getDeck (deckId) {
 		})
 }
 
-export function saveDeckTitle ({ title }) {
+export function saveDeck ({ title }) {
 	return AsyncStorage.mergeItem(FLASHCARDS_STORAGE_KEY, JSON.stringify({
 		[title]: {
 			title,

@@ -21,17 +21,19 @@ describe('reducer', () => {
 	it('should handle ADD_DECK', () => {
 		const deck = mockDecks[Object.keys(mockDecks)[0]]
 
-		expect(decks({payload: deck}, {
-			type: ADD_DECK
-		})).toMatchObject({...initialState, payload: deck})
+		expect(decks(initialState, {
+			type: ADD_DECK,
+			payload: {title: deck.title}
+		})).toMatchObject({...initialState, [deck.title]: {title: deck.title, questions: []}})
 	})
 
 	it('should handle ADD_CARD', () => {
 		const deckId = Object.keys(mockDecks)[0]
 		const card = mockDecks[deckId].questions
 
-		expect(decks({payload: { deckId, card}}, {
-			type: ADD_DECK
-		})).toMatchObject({...initialState, payload: { deckId, card}})
+		expect(decks(initialState, {
+			type: ADD_DECK,
+			payload: { deckId, card }
+		})).toMatchObject({...initialState})
 	})
 })

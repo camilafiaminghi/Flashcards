@@ -20,6 +20,7 @@ const Tabs = {
 }
 
 const TabNavigationOptions = {
+	initialRouteName: 'Decks',
 	navigationOptions: {
 		header: null
 	},

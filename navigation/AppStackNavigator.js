@@ -26,12 +26,12 @@ const AppStackNavigator = createStackNavigator({
     screen: Deck,
     navigationOptions: stackNavOptions(textColorInverse, pColorDark)
   },
-  Quiz: {
-    screen: Quiz,
-    navigationOptions: stackNavOptions(textColorInverse, pColorDark)
-  },
   AddCard: {
     screen: AddCard,
+    navigationOptions: stackNavOptions(textColorInverse, pColorDark)
+  },
+  Quiz: {
+    screen: Quiz,
     navigationOptions: stackNavOptions(textColorInverse, pColorDark)
   }
 })

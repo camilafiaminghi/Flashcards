@@ -86,11 +86,10 @@ class Decks extends Component {
 	}
 }
 
-export const mapStateToProps = ({ entries }) => {
-
-	return {
-		decksKeys: Object.keys(entries),
-		decks: entries
+export const mapStateToProps = ({ decks }) => {
+return {
+		decksKeys: Object.keys(decks),
+		decks: decks
 	}
 }
 
@@ -130,7 +129,7 @@ const styles = StyleSheet.create({
   },
   detail: {
   	fontSize: 14,
-  	color: pColor
+  	color: sColorDark
   },
   textEmpty: {
   	textAlign: 'center',

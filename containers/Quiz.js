@@ -105,12 +105,12 @@ export class Quiz extends Component {
 	}
 }
 
-export const mapStateToProps = ({ entries }, { navigation }) => {
+export const mapStateToProps = ({ decks }, { navigation }) => {
 	const { deckId } = navigation.state.params
 
 	return {
 		deckId,
-		questions: entries[deckId].questions
+		questions: decks[deckId].questions
 	}
 }
 

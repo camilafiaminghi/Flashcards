@@ -1,4 +1,4 @@
-const entries = {
+const decks = {
   React: {
     title: 'React',
     questions: [
@@ -22,4 +22,4 @@ const entries = {
     ]
   }
 }
-export default entries
+export default decks

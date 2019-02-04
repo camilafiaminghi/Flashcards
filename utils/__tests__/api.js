@@ -2,10 +2,10 @@ import {
 	setInitialData,
 	getDecks,
 	getDeck,
-	saveDeckTitle,
+	saveDeck,
 	addCardToDeck } from '../api'
 
-import entries from '../../__helpers__/decks'
+import decks from '../../__helpers__/decks'
 import card from '../../__helpers__/card'
 import MockAsyncStorage from './../../__helpers__/MockAsyncStorage'
 
@@ -23,13 +23,13 @@ describe('api', () => {
 			.then((result) => expect(result).toEqual(null))
 	})
 
-	it('saveDeckTitle should return null', () => {
-		saveDeckTitle(Object.keys(entries)[0])
+	it('saveDeck should return null', () => {
+		saveDeck(Object.keys(decks)[0])
 			.then((result) => expect(result).toEqual(null))
 	})
 
 	it('addCardToDeck should return null', () => {
-		addCardToDeck(Object.keys(entries)[0])
+		addCardToDeck(Object.keys(decks)[0])
 			.then((result) => expect(result).toEqual(null))
 	})
 })

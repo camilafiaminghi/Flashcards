@@ -8,22 +8,22 @@ const decks = (state = {}, action) => {
 		case RECEIVE_DECKS:
 			return {
 				...state,
-				...action.decks
+				...action.payload
 			}
 		case ADD_DECK:
 			return {
 				...state,
-				[action.payload] : {
-					title: action.payload,
+				[action.payload.title] : {
+					title: action.payload.title,
 					questions: []
 				}
 			}
 		case ADD_CARD:
 			return {
 				...state,
-				[action.deckId] : {
-					...state[action.deckId],
-					questions: [...state[action.deckId].questions, action.card]
+				[action.payload.deckId] : {
+					...state[action.payload.deckId],
+					questions: [...state[action.payload.deckId].questions, action.payload.card]
 				}
 			}
 		default:

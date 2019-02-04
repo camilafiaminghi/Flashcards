@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { NavigationActions } from 'react-navigation'
+import { NavigationActions, HeaderBackButton } from 'react-navigation'
 import { connect } from 'react-redux'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
 class Deck extends Component {
@@ -10,7 +10,12 @@ class Deck extends Component {
 	static navigationOptions = ({ navigation }) => {
 		const { deckId } = navigation.state.params
 		return {
-			title: deckId
+			title: deckId,
+			headerLeft: (
+	      <HeaderBackButton
+	        onPress={() => navigation.navigate('Decks', { parentNavigation: navigation })}
+	      />
+	    )
 		}
 	}
 
@@ -67,12 +72,12 @@ class Deck extends Component {
 	}
 }
 
-export const mapStateToProps = ({ entries }, { navigation }) => {
+export const mapStateToProps = ({ decks }, { navigation }) => {
 	const { deckId } = navigation.state.params
 
 	return {
 		deckId,
-		deck: entries[deckId]
+		deck: decks[deckId]
 	}
 }
 
@@ -109,7 +114,7 @@ const styles = StyleSheet.create({
   detail: {
   	alignSelf: 'center',
   	fontSize: 16,
-  	color: pColorLight
+  	color: sColorDark
   },
   input: {
 		flexDirection: 'row',
