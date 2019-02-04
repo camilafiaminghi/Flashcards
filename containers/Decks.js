@@ -3,13 +3,13 @@ import PropTypes from 'prop-types'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
-import { handleReceiveEntries } from '../actions'
+import { handleReceiveDecks } from '../actions'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
 class Decks extends Component {
 
 	static propTypes = {
-		handleEntries: PropTypes.func.isRequired,
+		handleDecks: PropTypes.func.isRequired,
 		decksKeys: PropTypes.array.isRequired,
 		decks: PropTypes.object.isRequired
 	}
@@ -24,16 +24,16 @@ class Decks extends Component {
 		}))
 	}
 
-	toDeck = (entryId) => {
+	toDeck = (deckId) => {
 		this.props.navigation.dispatch(NavigationActions.navigate({
 			routeName: 'Deck',
-			params: { entryId }
+			params: { deckId }
 		}))
 	}
 
 	componentDidMount() {
-		const { handleEntries } = this.props
-		handleEntries()
+		const { handleDecks } = this.props
+		handleDecks()
 			.then(() => (this.setState({loaded: true})))
 	}
 
@@ -96,7 +96,7 @@ export const mapStateToProps = ({ entries }) => {
 
 export const mapDispatchToProps = (dispatch) => {
   return {
-    handleEntries: () => dispatch(handleReceiveEntries())
+    handleDecks: () => dispatch(handleReceiveDecks())
   }
 }
 

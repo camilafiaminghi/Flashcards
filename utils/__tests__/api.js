@@ -5,7 +5,7 @@ import {
 	saveDeckTitle,
 	addCardToDeck } from '../api'
 
-import entries from '../../__helpers__/entries'
+import entries from '../../__helpers__/decks'
 import card from '../../__helpers__/card'
 import MockAsyncStorage from './../../__helpers__/MockAsyncStorage'
 

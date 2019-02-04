@@ -5,7 +5,7 @@ import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store'
 import renderer from 'react-test-renderer'
 import { Quiz } from '../Quiz'
-import mockStore from '../../__helpers__/entries'
+import mockStore from '../../__helpers__/decks'
 
 let wrapper
 let component
@@ -15,7 +15,7 @@ const navigation = {
 	navigate: jest.fn(),
 	state: {
 		params: {
-			entryId: Object.keys(mockStore)[0]
+			deckId: Object.keys(mockStore)[0]
 		}
 	},
 	getParam: jest.fn(),
@@ -23,7 +23,7 @@ const navigation = {
 }
 const props = {
 	navigation,
-	entryId: Object.keys(mockStore)[0],
+	deckId: Object.keys(mockStore)[0],
 	questions: mockStore[Object.keys(mockStore)[0]].questions
 }
 

@@ -1,58 +1,54 @@
-import { setInitialData, getDecks, getDeck, saveDeckTitle, addCardToDeck } from '../utils/api'
+import { setInitialData, getDecks, saveDeckTitle, addCardToDeck } from '../utils/api'
 
-export const RECEIVE_ENTRIES = 'RECEIVE_ENTRIES'
-export const ADD_ENTRY = 'ADD_ENTRY'
+export const RECEIVE_DECKS = 'RECEIVE_DECKS'
+export const ADD_DECK = 'ADD_DECK'
 export const ADD_CARD = 'ADD_CARD'
 
-export function receiveEntries (entries) {
+export function receiveDecks (decks) {
 	return {
-		type: RECEIVE_ENTRIES,
-		entries
+		type: RECEIVE_DECKS,
+		payload: decks
 	}
 }
 
-export function addEntry (entry) {
+export const addDeck = (deck) => {
 	return {
-		type: ADD_ENTRY,
-		entry
+		type: ADD_DECK,
+		payload: deck
 	}
 }
 
-export function addCard (entryId, card) {
+export function addCard (deckId, card) {
 	return {
 		type: ADD_CARD,
-		entryId,
-		card
+		payload: { deckId, card }
 	}
 }
 
-export function handleReceiveEntries () {
+export function handleReceiveDecks () {
 	return (dispatch) => {
 		// dispatch(/* LOADING */)
 
 		return setInitialData()
 			.then(getDecks)
-			.then((data) => dispatch(receiveEntries(JSON.parse(data))))
-			.catch((error) => console.log(error))
+			.then((data) => dispatch(receiveDecks(JSON.parse(data), false)))
 	}
 }
 
-export function handleAddEntry (entry) {
+export function handleAddDeck (entry) {
 	return (dispatch) => {
 		// dispatch(/* LOADING */)
 
 		return saveDeckTitle(entry)
-			.then(dispatch(addEntry(entry)))
-			.catch((error) => console.log(error))
+			.then(dispatch(addDeck(entry)))
 	}
 }
 
-export function handleAddCard (entryId, card) {
+export function handleAddCard (deckId, card) {
 	return (dispatch) => {
 		// dispatch(/* LOADING */)
 
-		return addCardToDeck(entryId, card)
-			.then(dispatch(addCard(entryId, card)))
-			.catch((error) => console.log(error))
+		return addCardToDeck(deckId, card)
+			.then(dispatch(addCard(deckId, card)))
 	}
 }

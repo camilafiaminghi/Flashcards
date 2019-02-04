@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { NavigationActions } from 'react-navigation'
 import { connect } from 'react-redux'
 import { StyleSheet, Text, View, KeyboardAvoidingView, TextInput, TouchableOpacity } from 'react-native'
-import { handleAddEntry } from '../actions'
+import { handleAddDeck } from '../actions'
 import { isValid } from '../utils/validation'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 import AppTextInput from '../components/AppTextInput'
@@ -11,7 +11,7 @@ import AppTextInput from '../components/AppTextInput'
 class AddDeck extends Component {
 
 	static propTypes = {
-		onAddEntry: PropTypes.func.isRequired
+		onAddDeck: PropTypes.func.isRequired
 	}
 
 	state = {
@@ -25,15 +25,15 @@ class AddDeck extends Component {
 
 		this.props.navigation.dispatch(NavigationActions.navigate({
 			routeName: 'Deck',
-			params: { entryId: title }
+			params: { deckId: title }
 		}))
 	}
 
 	submit = () => {
-		const { onAddEntry } = this.props
+		const { onAddDeck } = this.props
 		const { title } = this.state
 
-		onAddEntry({ title })
+		onAddDeck({ title })
 			.then(this.setState((state) => ({...state, resetValue: true})))
 			.then(this.toDeck) /* Navigate to Decks */
 	}
@@ -90,7 +90,7 @@ class AddDeck extends Component {
 
 export const mapDispatchToProps = (dispatch) => {
 	return {
-		onAddEntry: (entry) => dispatch(handleAddEntry(entry))
+		onAddDeck: (deck) => dispatch(handleAddDeck(deck))
 	}
 }
 

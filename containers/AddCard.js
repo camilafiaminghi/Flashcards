@@ -17,7 +17,7 @@ class AddCard extends Component {
 	}
 
 	static propTypes = {
-		entryId: PropTypes.string.isRequired
+		deckId: PropTypes.string.isRequired
 	}
 
 	state = {
@@ -53,19 +53,19 @@ class AddCard extends Component {
 	}
 
 	toDeck = () => {
-		const { entryId } = this.props
+		const { deckId } = this.props
 
 		this.props.navigation.dispatch(NavigationActions.navigate({
 			routeName: 'Deck',
-			params: { entryId }
+			params: { deckId }
 		}))
 	}
 
 	submit = () => {
-		const { onAddCard, entryId } = this.props
+		const { onAddCard, deckId } = this.props
 		const { card } = this.state
 
-		onAddCard(entryId, card)
+		onAddCard(deckId, card)
 			.then(this.toDeck) /* Navigate to Deck */
 	}
 
@@ -101,16 +101,16 @@ class AddCard extends Component {
 }
 
 export const mapStateToProps = (state, { navigation }) => {
-	const { entryId } = navigation.state.params
+	const { deckId } = navigation.state.params
 
 	return {
-		entryId
+		deckId
 	}
 }
 
 export const mapDispatchToProps = (dispatch) => {
 	return {
-		onAddCard: (entryId, card) => dispatch(handleAddCard(entryId, card))
+		onAddCard: (deckId, card) => dispatch(handleAddCard(deckId, card))
 	}
 }
 

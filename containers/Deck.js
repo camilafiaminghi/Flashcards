@@ -8,32 +8,32 @@ import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, s
 class Deck extends Component {
 
 	static navigationOptions = ({ navigation }) => {
-		const { entryId } = navigation.state.params
+		const { deckId } = navigation.state.params
 		return {
-			title: entryId
+			title: deckId
 		}
 	}
 
 	static propTypes = {
 		deck: PropTypes.object.isRequired,
-		entryId: PropTypes.string.isRequired
+		deckId: PropTypes.string.isRequired
 	}
 
 	toAddCard = () => {
-		const { entryId } = this.props
+		const { deckId } = this.props
 
 		this.props.navigation.dispatch(NavigationActions.navigate({
 			routeName: 'AddCard',
-			params: { entryId }
+			params: { deckId }
 		}))
 	}
 
 	toQuiz = () => {
-		const { entryId } = this.props
+		const { deckId } = this.props
 
 		this.props.navigation.dispatch(NavigationActions.navigate({
 			routeName: 'Quiz',
-			params: { entryId }
+			params: { deckId }
 		}))
 	}
 
@@ -68,11 +68,11 @@ class Deck extends Component {
 }
 
 export const mapStateToProps = ({ entries }, { navigation }) => {
-	const { entryId } = navigation.state.params
+	const { deckId } = navigation.state.params
 
 	return {
-		entryId,
-		deck: entries[entryId]
+		deckId,
+		deck: entries[deckId]
 	}
 }
 

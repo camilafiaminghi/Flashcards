@@ -17,7 +17,7 @@ export class Quiz extends Component {
 	}
 
 	static propTypes = {
-		entryId: PropTypes.string.isRequired,
+		deckId: PropTypes.string.isRequired,
 		questions: PropTypes.array.isRequired
 	}
 
@@ -28,7 +28,7 @@ export class Quiz extends Component {
 	}
 
 	handleNext = () => {
-		const { entryId, questions, navigation } = this.props
+		const { deckId, questions, navigation } = this.props
 		const { current } = this.state
 
 		this.setState((state) => ({
@@ -38,9 +38,9 @@ export class Quiz extends Component {
 		}))
 
 		if ( current + 1 === questions.length ) {
-			navigation.setParams({current: `${entryId}`})
+			navigation.setParams({current: `${deckId}`})
 		} else {
-			navigation.setParams({current: `${entryId} ${current + 2}/${questions.length}`})
+			navigation.setParams({current: `${deckId} ${current + 2}/${questions.length}`})
 		}
 	}
 
@@ -66,8 +66,8 @@ export class Quiz extends Component {
 
 	componentDidMount() {
 		const { current, scored } = this.state
-		const { entryId, questions, navigation } = this.props
-		navigation.setParams({current: `${entryId} ${current + 1}/${questions.length}`})
+		const { deckId, questions, navigation } = this.props
+		navigation.setParams({current: `${deckId} ${current + 1}/${questions.length}`})
 	}
 
 	render() {
@@ -106,11 +106,11 @@ export class Quiz extends Component {
 }
 
 export const mapStateToProps = ({ entries }, { navigation }) => {
-	const { entryId } = navigation.state.params
+	const { deckId } = navigation.state.params
 
 	return {
-		entryId,
-		questions: entries[entryId].questions
+		deckId,
+		questions: entries[deckId].questions
 	}
 }
 

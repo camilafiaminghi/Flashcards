@@ -1,4 +1,4 @@
-import storage from './entries'
+import storage from './decks'
 
 export default {
 	mergeItem: jest.fn(
