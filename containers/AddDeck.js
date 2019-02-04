@@ -20,9 +20,12 @@ class AddDeck extends Component {
 		resetValue: false
 	}
 
-	toDecks = () => {
+	toDeck = () => {
+		const { title } = this.state
+
 		this.props.navigation.dispatch(NavigationActions.navigate({
-			routeName: 'Decks'
+			routeName: 'Deck',
+			params: { entryId: title }
 		}))
 	}
 
@@ -32,7 +35,7 @@ class AddDeck extends Component {
 
 		onAddEntry({ title })
 			.then(this.setState((state) => ({...state, resetValue: true})))
-			.then(this.toDecks) /* Navigate to Decks */
+			.then(this.toDeck) /* Navigate to Decks */
 	}
 
 	onInputChange = (name, value, valid) => {
@@ -76,7 +79,7 @@ class AddDeck extends Component {
 		      	style={[styles.input, styles.btn]}
 		      	disabled={!valid}
 		      	onPress={this.submit}>
-		      	<Text style={ valid ? styles.btnText : styles.btnDisabledText }>{'submit'.toUpperCase()}</Text>
+		      	<Text style={ valid ? styles.btnText : styles.btnDisabledText }>{'Create Deck'.toUpperCase()}</Text>
 		      </TouchableOpacity>
 
 				</KeyboardAvoidingView>

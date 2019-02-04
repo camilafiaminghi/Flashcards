@@ -68,9 +68,14 @@ class Decks extends Component {
 		          	style={styles.item}
 								onPress={() => this.toDeck(item)}>
 		            <Text style={styles.text}>{item}</Text>
-		            <Text style={styles.detail}>
-		            	{decks[item].questions.length} { decks[item].questions.length === 1 && 'card' } { decks[item].questions.length !== 1 && 'cards' }
-		            </Text>
+		            { decks[item].hasOwnProperty('questions') &&
+			            <Text style={styles.detail}>
+			            	{decks[item].questions.length} { decks[item].questions.length === 1 && 'card' } { decks[item].questions.length !== 1 && 'cards' }
+			            </Text>
+			          }
+			          { !decks[item].hasOwnProperty('questions') &&
+			          	<Text style={styles.detail}>0 cards </Text>
+			        	}
 		          </TouchableOpacity>
           	)
           }

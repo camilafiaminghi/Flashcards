@@ -24,10 +24,10 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "org.appfitness.exp"
+      "bundleIdentifier": "org.flashcards.exp"
     },
     "android": {
-    	"package": "org.appfitness.exp"
+    	"package": "org.flashcards.exp"
     }
   }
 }
