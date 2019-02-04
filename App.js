@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
-import thunk from 'redux-thunk'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import { Platform, StyleSheet, Text, View } from 'react-native'
 import { Constants } from 'expo'
 import { createBottomTabNavigator, createMaterialTopTabNavigator, createStackNavigator, createAppContainer } from 'react-navigation'
-import reducers from './reducers'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from './utils/colors'
 import { setLocalNotification } from './utils/helpers'
+import store from './store'
 import AppStatusBar from './components/AppStatusBar'
 /* VIEWS */
 import Decks from './containers/Decks'
@@ -15,11 +13,6 @@ import Deck from './containers/Deck'
 import AddDeck from './containers/AddDeck'
 import AddCard from './containers/AddCard'
 import Quiz from './containers/Quiz'
-
-const store = createStore(
-	reducers(),
-	applyMiddleware(thunk)
-)
 
 const Tabs = {
 	Decks: {
