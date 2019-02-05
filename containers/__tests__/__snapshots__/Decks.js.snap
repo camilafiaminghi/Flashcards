@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Decks /> matches snapshot 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#efefef",
+      "flex": 1,
+      "paddingBottom": 4,
+      "paddingTop": 4,
+    }
+  }
+/>
+`;

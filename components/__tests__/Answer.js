@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { TouchableOpacity } from 'react-native'
 import renderer from 'react-test-renderer'
 import Answer from '../Answer'
-import card from '../../__helpers__/card'
+import card from '../../__mocks__/card'
 
 let wrapper
 let instance

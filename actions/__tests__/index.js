@@ -7,9 +7,9 @@ import {
 	addCard,
 	handleAddDeck,
 	handleAddCard } from '../index'
-import decks from '../../__helpers__/decks'
-import card from '../../__helpers__/card'
-import MockAsyncStorage from '../../__helpers__/MockAsyncStorage'
+import decks from '../../__mocks__/decks'
+import card from '../../__mocks__/card'
+import MockAsyncStorage from '../../__mocks__/MockAsyncStorage'
 
 jest.setMock('AsyncStorage', MockAsyncStorage)
 const configStore = configureMockStore([thunk])

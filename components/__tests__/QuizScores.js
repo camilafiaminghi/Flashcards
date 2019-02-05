@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Text } from 'react-native'
 import renderer from 'react-test-renderer'
 import QuizScores from '../QuizScores'
-import card from '../../__helpers__/card'
+import card from '../../__mocks__/card'
 
 jest.useFakeTimers()
 

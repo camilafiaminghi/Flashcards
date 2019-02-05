@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { StyleSheet, Text, View, TouchableOpacity, Button } from 'react-native'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
-class Deck extends Component {
+export class Deck extends Component {
 
 	static navigationOptions = ({ navigation }) => {
 		const { deckId } = navigation.state.params

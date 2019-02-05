@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native
 import { handleReceiveDecks } from '../actions'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 
-class Decks extends Component {
+export class Decks extends Component {
 
 	static propTypes = {
 		decksKeys: PropTypes.array.isRequired,

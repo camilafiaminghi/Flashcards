@@ -8,7 +8,7 @@ import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, s
 import { isValid } from '../utils/validation'
 import AppTextInput from '../components/AppTextInput'
 
-class AddCard extends Component {
+export class AddCard extends Component {
 
 	static navigationOptions = ({ navigation }) => {
 		return {
@@ -102,7 +102,6 @@ class AddCard extends Component {
 
 export const mapStateToProps = (state, { navigation }) => {
 	const { deckId } = navigation.state.params
-
 	return {
 		deckId
 	}

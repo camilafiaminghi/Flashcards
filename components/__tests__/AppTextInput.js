@@ -42,10 +42,26 @@ describe('<AppTextInput />', () => {
 		input.props().onChangeText('test value')
 		component.update()
 
-		const text = component.find(Text)
-
 		expect(component.state('changed')).toBe(true)
 		expect(component.state('valid')).toBe(true)
 		expect(props.onInputChange).toHaveBeenCalledTimes(1)
+	})
+
+	it('should shows characteres exceeded', () => {
+		const input = component.find(TextInput)
+		input.props().onChangeText('test value')
+		component.update()
+
+		const text = component.find(Text)
+		expect(text.shallow().props().children).toEqual('max characters exceeded')
+	})
+
+	it('should shows characteres limit', () => {
+		const input = component.find(TextInput)
+		input.props().onChangeText('test')
+		component.update()
+
+		const text = component.find(Text)
+		expect(text.shallow().props().children).toEqual([6, ' characteres left'])
 	})
 })

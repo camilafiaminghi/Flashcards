@@ -5,7 +5,7 @@ import Quiz from '../Quiz'
 import Question from '../../components/Question'
 import Answer from '../../components/Answer'
 import QuizScores from '../../components/QuizScores'
-import decks from '../../__helpers__/decks'
+import decks from '../../__mocks__/decks'
 
 jest.useFakeTimers()
 
@@ -62,6 +62,7 @@ describe('<Quiz />', () => {
 
 		expect(component.state('current')).toEqual(1)
 		expect(component.state('showAnswer')).toEqual(false)
+		expect(props.navigation.setParams).toHaveBeenCalled()
 	})
 
 	it('should handleScore', () => {

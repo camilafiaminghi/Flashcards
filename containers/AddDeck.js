@@ -8,7 +8,7 @@ import { isValid } from '../utils/validation'
 import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, sColorLight, sColorDark } from '../utils/colors'
 import AppTextInput from '../components/AppTextInput'
 
-class AddDeck extends Component {
+export class AddDeck extends Component {
 
 	static propTypes = {
 		onAddDeck: PropTypes.func.isRequired

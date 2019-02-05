@@ -3,7 +3,7 @@ import {
 		ADD_DECK,
 		ADD_CARD } from '../../actions'
 import decks from '../index'
-import mockDecks from '../../__helpers__/decks'
+import mockDecks from '../../__mocks__/decks'
 
 const initialState = {decks:{}}
 
