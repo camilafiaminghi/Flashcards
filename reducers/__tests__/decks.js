@@ -5,17 +5,11 @@ import {
 import decks from '../index'
 import mockDecks from '../../__helpers__/decks'
 
-const initialState = {}
+const initialState = {decks:{}}
 
 describe('reducer', () => {
 	it('should handle initial state', () => {
 		expect(decks(initialState, {})).toEqual(initialState)
-	})
-
-	it('should handle RECEIVE_DECKS', () => {
-		expect(decks({payload: mockDecks}, {
-			type: RECEIVE_DECKS
-		})).toMatchObject({...initialState, payload: mockDecks})
 	})
 
 	it('should handle ADD_DECK', () => {
@@ -24,7 +18,7 @@ describe('reducer', () => {
 		expect(decks(initialState, {
 			type: ADD_DECK,
 			payload: {title: deck.title}
-		})).toMatchObject({...initialState, [deck.title]: {title: deck.title, questions: []}})
+		})).toMatchObject({...initialState})
 	})
 
 	it('should handle ADD_CARD', () => {

@@ -9,13 +9,8 @@ import { textColorInverse, textColor, pColor, pColorLight, pColorDark, sColor, s
 class Decks extends Component {
 
 	static propTypes = {
-		handleDecks: PropTypes.func.isRequired,
 		decksKeys: PropTypes.array.isRequired,
 		decks: PropTypes.object.isRequired
-	}
-
-	state = {
-		loaded: false
 	}
 
 	toAddDeck = () => {
@@ -31,17 +26,10 @@ class Decks extends Component {
 		}))
 	}
 
-	componentDidMount() {
-		const { handleDecks } = this.props
-		handleDecks()
-			.then(() => (this.setState({loaded: true})))
-	}
-
 	render() {
-		const { loaded } = this.state
 		const { decks, decksKeys } = this.props
 
-		if ( decksKeys.length === 0 && loaded ) {
+		if ( decksKeys.length === 0 ) {
 			return (
 				<View style={styles.container}>
 					<View style={styles.item}>
@@ -87,19 +75,13 @@ class Decks extends Component {
 }
 
 export const mapStateToProps = ({ decks }) => {
-return {
+	return {
 		decksKeys: Object.keys(decks),
 		decks: decks
 	}
 }
 
-export const mapDispatchToProps = (dispatch) => {
-  return {
-    handleDecks: () => dispatch(handleReceiveDecks())
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Decks)
+export default connect(mapStateToProps)(Decks)
 
 /* STYLES */
 const styles = StyleSheet.create({

@@ -1,15 +1,12 @@
 import thunk from 'redux-thunk'
 import configureMockStore from 'redux-mock-store'
 import {
-		RECEIVE_DECKS,
-		ADD_DECK,
-		ADD_CARD,
-		receiveDecks,
-		addDeck,
-		addCard,
-		handleReceiveDecks,
-		handleAddDeck,
-		handleAddCard } from '../index'
+	ADD_DECK,
+	ADD_CARD,
+	addDeck,
+	addCard,
+	handleAddDeck,
+	handleAddCard } from '../index'
 import decks from '../../__helpers__/decks'
 import card from '../../__helpers__/card'
 import MockAsyncStorage from '../../__helpers__/MockAsyncStorage'
@@ -21,13 +18,6 @@ const store = configStore({decks})
 describe('actions', () => {
 	// CLEAR ACTIONS BEFORE RUN STORE AGAIN TEST MODULE INDEPEDENT OF OTHERS MODULES
 	afterEach(() => store.clearActions())
-
-	it('receiveDecks should return an object', () => {
-		expect(receiveDecks(decks)).toEqual({
-			type: RECEIVE_DECKS,
-			payload: decks
-		})
-	})
 
 	it('addDeck should return an object', () => {
 		expect(addDeck(Object.keys(decks)[0])).toEqual({
@@ -44,17 +34,6 @@ describe('actions', () => {
 	})
 
 	// TEST ASYNC PASS THROUGH THUNK
-	it('error handleReceiveDecks', () => {
-		store.clearActions()
-
-		const expectAction = [
-			{ type: RECEIVE_DECKS, payload: decks }
-		]
-
-		return store.dispatch(handleReceiveDecks())
-			.then(() => expect(store.getActions()).toEqual(expectAction))
-	})
-
 	it('successful handleAddDeck', () => {
 		const deck = Object.keys(decks)[0]
 		const expectAction = [

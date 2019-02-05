@@ -11,7 +11,7 @@ export function clearLocalNotification () {
 }
 
 const notificationOptions = {
-  title: 'Study Today!',
+  title: 'Reminder from Flashcards',
   body: '👋 don\'t forget to study!',
   ios: {
     sound: true,
